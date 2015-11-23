@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+   <application>{{ insert your project id here }}</application>
+   <version>1</version>
+
+   <!--
+   Precompilation fails at the moment.
+   This might be a result of the Managed VM beta program.
+   -->
+   <precompilation-enabled>false</precompilation-enabled>
+
+   <threadsafe>true</threadsafe>
+   <vm>true</vm>
+
+   <automatic-scaling>
+      <min-num-instances>1</min-num-instances>
+      <max-num-instances>1</max-num-instances>
+      <cool-down-period-sec>60</cool-down-period-sec>
+      <cpu-utilization>
+         <target-utilization>0.5</target-utilization>
+      </cpu-utilization>
+   </automatic-scaling>
+
+   <beta-settings>
+      <setting name="machine_type" value="g1-small"/>
+      <setting name="java_quickstart" value="true" />
+   </beta-settings>
+
+</appengine-web-app>

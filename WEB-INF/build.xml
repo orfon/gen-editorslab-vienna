@@ -1,0 +1,51 @@
+<project name="gen-editors-lab" basedir="." default="update">
+   <description>Load dependencies and packages</description>
+
+   <target name="update" depends="dependencies, packages" description="updates everything">
+      <echo message="Updated dependencies and packages."/>
+   </target>
+
+   <target name="dependencies">
+      <mkdir dir="lib" />
+      <get
+         src="http://central.maven.org/maven2/org/mozilla/rhino/1.7.7/rhino-1.7.7.jar"
+         verbose="true"
+         dest="lib/rhino-1.7.7.jar"
+      />
+      <get
+         src="http://hoffburg.at/dependencies/ringo-0.12/ringo-core.jar"
+         verbose="true"
+         dest="lib/ringo-core.jar"
+      />
+      <get
+         src="http://hoffburg.at/dependencies/ringo-0.12/ringo-modules.jar"
+         verbose="true"
+         dest="lib/ringo-modules.jar"
+      />
+      <get
+         src="http://repo1.maven.org/maven2/com/google/appengine/appengine-api-1.0-sdk/1.9.28/appengine-api-1.0-sdk-1.9.28.jar"
+         verbose="true"
+         dest="lib"
+      />
+   </target>
+
+   <target name="packages">
+      <mkdir dir="packages" />
+      <get
+         src="http://packages.ringojs.org/download/stick/latest"
+         verbose="true"
+         dest="packages/stick.zip"
+      />
+      <get
+         src="http://packages.ringojs.org/download/reinhardt/latest"
+         verbose="true"
+         dest="packages/reinhardt.zip"
+      />
+
+      <unzip src="packages/stick.zip" dest="packages/stick"/>
+      <unzip src="packages/reinhardt.zip" dest="packages/reinhardt"/>
+      <delete file="packages/stick.zip"/>
+      <delete file="packages/reinhardt.zip"/>
+   </target>
+
+</project>
