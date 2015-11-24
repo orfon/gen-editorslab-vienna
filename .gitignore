@@ -39,3 +39,4 @@ Temporary Items
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 WEB-INF/appengine-web.xml
+WEB-INF/config/config.json
