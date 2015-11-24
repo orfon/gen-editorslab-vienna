@@ -41,11 +41,25 @@
          verbose="true"
          dest="packages/reinhardt.zip"
       />
+      <get
+         src="http://packages.ringojs.org/download/gestalt/latest"
+         verbose="true"
+         dest="packages/gestalt.zip"
+      />
+      <get
+         src="http://packages.ringojs.org/download/ringo-sqlstore/latest"
+         verbose="true"
+         dest="packages/ringo-sqlstore.zip"
+      />
 
       <unzip src="packages/stick.zip" dest="packages/stick"/>
       <unzip src="packages/reinhardt.zip" dest="packages/reinhardt"/>
+      <unzip src="packages/gestalt.zip" dest="packages/gestalt"/>
+      <unzip src="packages/ringo-sqlstore.zip" dest="packages/ringo-sqlstore"/>
+      <delete file="packages/gestalt.zip"/>
       <delete file="packages/stick.zip"/>
       <delete file="packages/reinhardt.zip"/>
+      <delete file="packages/ringo-sqlstore.zip"/>
    </target>
 
 </project>

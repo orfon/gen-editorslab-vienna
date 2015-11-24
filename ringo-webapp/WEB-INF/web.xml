@@ -5,8 +5,8 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
    version="2.5">
   <display-name>gen-editorslab-vienna</display-name>
-   <servlet>
 
+   <servlet>
       <servlet-name>ringo</servlet-name>
       <servlet-class>org.ringojs.jsgi.JsgiServlet</servlet-class>
       <init-param>

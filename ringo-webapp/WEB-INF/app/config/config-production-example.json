@@ -1,0 +1,7 @@
+{
+   "db:driver":      "com.mysql.jdbc.GoogleDriver",
+   "db:url":         "jdbc:google:mysql://myprojectid:instance-name/antwortomat",
+   "db:username":    "root",
+   "db:password":    "",
+   "db:cacheSize":   500
+}
