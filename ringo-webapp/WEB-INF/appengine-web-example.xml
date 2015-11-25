@@ -8,6 +8,7 @@
    This might be a result of the Managed VM beta program.
    -->
    <precompilation-enabled>false</precompilation-enabled>
+   <sessions-enabled>true</sessions-enabled>
 
    <threadsafe>true</threadsafe>
    <vm>true</vm>

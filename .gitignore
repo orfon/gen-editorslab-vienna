@@ -78,3 +78,4 @@ ringo-webapp/WEB-INF/app/config/config-production.json
 ringo-webapp/WEB-INF/appengine-generated
 ringo-webapp/WEB-INF/app/config/config.js
 ringo-webapp/WEB-INF/appengine-web.xml
+.idea

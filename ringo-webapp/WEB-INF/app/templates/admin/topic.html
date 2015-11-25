@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>{{ topic.title }}</h2>
+
+<dl>
+   <dt>Slug:</dt>
+   <dd>{{ topic.slug }}</dd>
+   <dt>Image:</dt>
+   <dd>
+      {% if topic.image %}
+      <img src="{{ topic.image }}" alt="" style="max-width: 320px; margin-bottom: 8px;">
+      {% else %}
+      None
+      {% endif %}
+   </dd>
+   <dt>Creator:</dt>
+   <dd>{{ topic.creator.name }} <span style="color: #777;">({{ topic.created | date:"dd.MM.yyyy" }})</span></dd>
+</dl>
+
+<h4>New Questions</h4>
+
+<ul>
+   {% for question in unreviewedQuestions %}
+      <li>
+         {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
+         <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/review" class="button tiny hollow">Mark as Reviewed</a>
+         <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/drop" class="button tiny hollow alert">Drop</a>
+      </li>
+   {% empty %}
+      <li>No questions so far.</li>
+   {% endfor %}
+</ul>
+
+<h4>Waiting for Investigation</h4>
+
+<ul>
+   {% for question in reviewedQuestions %}
+   <li>
+      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
+      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/investigate" class="button tiny hollow">Mark as Under Investigation</a>
+   </li>
+   {% empty %}
+   <li>No questions so far.</li>
+   {% endfor %}
+</ul>
+
+<h4>Under Investigation</h4>
+
+<ul>
+   {% for question in investigationQuestions %}
+   <li>
+      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
+      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
+      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/answered" class="button tiny hollow">Set Answered</a>
+   </li>
+   {% empty %}
+   <li>No questions so far.</li>
+   {% endfor %}
+</ul>
+
+<h4>Answered</h4>
+
+<ul>
+   {% for question in answeredQuestions %}
+   <li>
+      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
+      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
+      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
+   </li>
+   {% empty %}
+   <li>No questions so far.</li>
+   {% endfor %}
+</ul>
+
+{% endblock %}

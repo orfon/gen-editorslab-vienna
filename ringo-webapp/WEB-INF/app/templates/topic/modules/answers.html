@@ -1,0 +1,10 @@
+{% if answeredQuestions.length > 0 %}
+
+<h3>Wir haben recherchiert &hellip;</h3>
+
+<ul>
+   {% for question in answeredQuestions %}
+   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
+   {% endfor %}
+</ul>
+{% endif %}

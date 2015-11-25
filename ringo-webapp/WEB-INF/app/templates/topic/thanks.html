@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>{{ topic.title }}</h2>
+
+<h3>Danke für deine Frage!</h3>
+
+<blockquote>
+   {{ question.text }}
+   <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
+</blockquote>
+
+<a href="/tp/{{ topic.slug }}" class="button">Zurück zur Übersicht</a>
+
+{% endblock %}

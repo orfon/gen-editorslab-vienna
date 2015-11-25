@@ -12,7 +12,7 @@ var notifyError = notify.onError(function (error) {
 
 const paths = {
    styles: {
-      dir:  "./ringo-webapp/assets/scss/",
+      dir:  "./ringo-webapp/assets/scss/**",
       main: "./ringo-webapp/assets/scss/main.scss",
       dest: "./ringo-webapp/assets/build/"
    },

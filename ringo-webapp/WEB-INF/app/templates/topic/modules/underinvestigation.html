@@ -1,0 +1,10 @@
+{% if investigationQuestions.length > 0 %}
+
+<h3>Das sehen wir uns gerade an &hellip;</h3>
+
+<ul>
+   {% for question in investigationQuestions %}
+   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
+   {% endfor %}
+</ul>
+{% endif %}

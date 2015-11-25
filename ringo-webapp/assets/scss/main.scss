@@ -1,4 +1,19 @@
-/* foo */
+body, h1, h2, h3, h4, h5, h6 {
+   font-family: "ORF ON", Arial, Helvetica, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   color: #333;
+}
+
 body {
-   background: red;
+   background: #f0f1f4;
+}
+
+.orfon-page {
+   margin: 10px 0 0 25px;
+   max-width: 970px;
+   background: #fff;
+   padding: 10px 15px;
+}
+
+.orfon-edlab-questionfield {
+   height: 90px;
 }

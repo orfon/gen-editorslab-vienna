@@ -1,0 +1,10 @@
+{% if reviewedQuestions.length > 0 %}
+
+<h3>Was Sie wissen wollen &hellip;</h3>
+
+<ul>
+   {% for question in reviewedQuestions %}
+   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
+   {% endfor %}
+</ul>
+{% endif %}

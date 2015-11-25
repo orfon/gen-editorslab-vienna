@@ -3,18 +3,32 @@ var config = require(module.resolve("./config/config"));
 
 var {Application} = require("stick");
 var app = exports.app = Application();
-app.configure("params", "mount", "route");
+app.configure("params", "session", "mount", "route");
 
 var {Reinhardt} = require("reinhardt");
 var reinhardt = new Reinhardt({
    loader: "WEB-INF/app/templates"
 });
 
+// the SQL store
+var store = require("./model/store");
+
+// detect if development or production environment
+var {SystemProperty} = Packages.com.google.appengine.api.utils;
+const PROD_ENV = SystemProperty.environment.value() == SystemProperty.Environment.Value.Production;
+
+// create tables if necessary, and app is not in production mode
+if (!PROD_ENV) {
+   if (typeof(store.syncTables) === "function") {
+      store.syncTables();
+   }
+}
+
 // mount routes
 app.mount("/admin", require("./routes/admin"));
+app.mount("/tp", require("./routes/topic"));
 
 // default routes
-
 app.get("/", function (req) {
    return response.html(reinhardt.getTemplate("frontpage.html").render({}));
 });

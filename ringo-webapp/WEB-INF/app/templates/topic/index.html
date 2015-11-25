@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>{{ topic.title }}</h2>
+
+<div class="orfon-edlab-frontmodule">
+   {% include "topic/modules/form.html" %}
+</div>
+
+<div class="orfon-edlab-frontmodule">
+   {% include "topic/modules/answers.html" %}
+</div>
+
+<div class="orfon-edlab-frontmodule">
+   {% include "topic/modules/underinvestigation.html" %}
+</div>
+
+<div class="orfon-edlab-frontmodule">
+   {% include "topic/modules/upforvoting.html" %}
+</div>
+
+{% endblock %}

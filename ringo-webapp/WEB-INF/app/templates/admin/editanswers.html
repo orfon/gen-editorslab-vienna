@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="row">
+   <div class="medium-12 columns">
+
+      <h2>Answer Question #{{ question.id }}</h2>
+      <blockquote>
+         {{ question.text }}
+         <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
+      </blockquote>
+   </div>
+</div>
+
+<form action="/admin/topic/{{ topic.slug }}/{{question.id}}/editanswers" method="post">
+   <div class="row">
+      <div class="medium-6 columns">
+         <h3>Add Answer</h3>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="medium-12 columns">
+         <label>Text:
+            <textarea name="text" rows="5"></textarea>
+         </label>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="medium-12 columns">
+         <label>Link
+            <input type="url" name="link" placeholder="http://" aria-describedby="answerHelp">
+         </label>
+         <p class="help-text" id="answerHelp">An answer can contain a text, a link, or both.</p>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="medium-6 columns">
+         <button class="button" type="submit">Add Answer</button>
+      </div>
+   </div>
+</form>
+
+<div class="row">
+   <div class="medium-12 columns">
+      <ul>
+         {% for answer in answers %}
+         <li>
+            {{ answer.id }} - {{ answer.text }} - {{ answer.creator.name }}
+            <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/{{ answer.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
+         </li>
+         {% empty %}
+         <li>No answers so far.</li>
+         {% endfor %}
+      </ul>
+   </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>Hello {{ user.name }}</h2>
+
+{% if message %}
+<div class="alert callout">
+   <p>{{ message }}</p>
+</div>
+{% endif %}
+
+<h3>Add Topic</h3>
+
+<form method="POST" action="createTopic" class="small-8">
+   <label>
+      Title
+      <input type="text" name="title" placeholder="My Special Topic" required>
+   </label>
+
+   <label>
+      Slug
+      <input type="text" name="slug" placeholder="my-special-topic" pattern="^[a-z0-9-]+$" required>
+   </label>
+
+   <label>
+      Image URL
+      <input type="url" name="image" placeholder="http://lorempixel.com/800/400/people/">
+   </label>
+
+   <button type="submit" class="button">Create Topic</button>
+</form>
+
+<a href="/admin/signout" class="button">Sign Out</a>
+
+{% endblock %}
