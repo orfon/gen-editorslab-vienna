@@ -34,6 +34,9 @@ app.get("/", function(request) {
       }));
    }
 
+   // for security to purge all old data
+   request.session.invalidate();
+
    return response.html(reinhardt.getTemplate("admin/signin.html").render({}));
 });
 
@@ -95,10 +98,10 @@ app.get("/topic/:slug", function(request, slug) {
 
    return response.html(reinhardt.getTemplate("admin/topic.html").render({
       "topic": topic,
-      "unreviewedQuestions": topic.unreviewedQuestions.map(function(i) { return i; }),
-      "reviewedQuestions": topic.reviewedQuestions.map(function(i) { return i; }),
-      "investigationQuestions": topic.investigationQuestions.map(function(i) { return i; }),
-      "answeredQuestions": topic.answeredQuestions.map(function(i) { return i; })
+      "unreviewedQuestions": topic.unreviewedQuestions.all(),
+      "reviewedQuestions": topic.reviewedQuestions.all(),
+      "investigationQuestions": topic.investigationQuestions.all(),
+      "answeredQuestions": topic.answeredQuestions.all()
    }));
 });
 
@@ -233,7 +236,7 @@ app.get("/topic/:slug/:question/editanswers", function(request, slug, qid) {
    return response.html(reinhardt.getTemplate("admin/editanswers.html").render({
       "topic": topic,
       "question": question,
-      "answers": question.answers.map(function(i) { return i; })
+      "answers": question.answers.all()
    }));
 });
 

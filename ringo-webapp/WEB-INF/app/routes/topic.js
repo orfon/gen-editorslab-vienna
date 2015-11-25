@@ -36,9 +36,9 @@ app.get("/:slug", function(request, slug) {
 
    return response.html(reinhardt.getTemplate("topic/index.html").render({
       "topic": topic,
-      "reviewedQuestions": topic.reviewedQuestions.map(function(i) { return i; }),
-      "investigationQuestions": topic.investigationQuestions.map(function(i) { return i; }),
-      "answeredQuestions": topic.answeredQuestions.map(function(i) { return i; })
+      "reviewedQuestions": topic.reviewedQuestions.all(),
+      "investigationQuestions": topic.investigationQuestions.all(),
+      "answeredQuestions": topic.answeredQuestions.all()
    }));
 });
 

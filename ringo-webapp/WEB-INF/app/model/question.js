@@ -64,6 +64,7 @@ Question.create = function(topic, text, enquirer) {
       "created": new Date()
    });
    question.save();
+   topic.unreviewedQuestions.invalidate();
    return question;
 };
 
