@@ -99,7 +99,6 @@ app.get("/:slug/danke", function(request, slug) {
 
    let qid = request.session.volatile;
    if (typeof qid === "number" && qid > 0) {
-      console.log("qid", qid);
       let question = Question.getById(qid);
 
       if (question != null && dates.diff(question.created, new Date(), "second") < 5) {
