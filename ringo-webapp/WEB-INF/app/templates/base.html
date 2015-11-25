@@ -4,26 +4,49 @@
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-   <title>{{ title }}</title>
+   <title>Meine Frage - news.ORF.at</title>
    <meta name="format-detection" content="telephone=no" />
    <link rel="stylesheet" href="//orf.at/fonts/fonts.css">
+   <link rel="stylesheet" href="/assets/motionui/motion-ui.min.css">
    <link rel="stylesheet" href="/assets/foundation-6/css/foundation.min.css">
    <link rel="stylesheet" href="/assets/build/editorslab.css">
+   <script src="/assets/motionui/motion-ui.min.js"></script>
+
+   <link rel="shortcut icon" type="image/ico" href="http://orf.at/favicon.ico" />
+   <link rel="apple-touch-icon" href="http://orf.at/mojo/1_3/storyserver//news/news/images/touch-icon-iphone.png"/>
+   <link rel="apple-touch-icon" sizes="76x76" href="http://orf.at/mojo/1_3/storyserver//news/news/images/touch-icon-ipad.png"/>
+   <link rel="apple-touch-icon" sizes="120x120" href="http://orf.at/mojo/1_3/storyserver//news/news/images/touch-icon-iphone-retina.png"/>
+   <link rel="apple-touch-icon" sizes="152x152" href="http://orf.at/mojo/1_3/storyserver//news/news/images/touch-icon-ipad-retina.png"/>
+
+   <meta name="robots" content="NOODP, NOYDIR" />
+   <meta name="format-detection" content="telephone=no" />
+   <meta property="fb:admins" content="100000441983612" />
+   <meta property="og:site_name" content="Meine Frage - news.ORF.at" />
+
 </head>
    <body>
 
       <div class="orfon-page">
 
-         <header>
-            <h1>GEN Editors Lab Vienna</h1>
+         <header class="orfon-header">
+            <h1><a href="/">
+               <img src="//orf.at/mojo/1_3/storyserver//news/news/images/news.svg" alt="news.ORF.at"><img src="//orf.at/mojo/1_3/storyserver//news/news/images/target_news.svg" alt="">
+            </a></h1>
+
+            <a href="/"><h2 class="orfon-edlab-subtitle">Meine Frage</h2></a>
+
          </header>
 
-         <main>
+         <main class="orfon-main">
             {% block main %}{% endblock%}
          </main>
 
-         <footer>
-            This is a prototype developed during the <a href="http://www.globaleditorsnetwork.org/programmes/editors-lab/orf-editors-lab/">ORF &amp; FJUM Editors Lab</a>. All shown functions and pages are for demonstration purpose only. This prototype is not an official product or any public offer by ORF. <a href="http://news.orf.at/stories/impressum/">Imprint</a>.
+         <footer class="orfon-footer">
+            <p>
+               This is a prototype developed during the <a href="http://www.globaleditorsnetwork.org/programmes/editors-lab/orf-editors-lab/">ORF &amp; FJUM Editors Lab</a>.<br>
+               All shown functions and pages are for demonstration purpose only. This prototype is not an official product or any public offer by ORF. <a href="http://news.orf.at/stories/impressum/">Imprint</a>
+            </p>
+            <img src="//orf.at/mojo/1_3/storyserver/news/common/images/orf-brick.svg" alt="">
          </footer>
 
       </div>
@@ -31,5 +54,6 @@
       <script src="/assets/foundation-6/js/vendor/jquery.min.js"></script>
       <script src="/assets/foundation-6/js/foundation.min.js"></script>
       <script>$(document).foundation();</script>
+      {% block customScripts %}{% endblock%}
    </body>
 </html>

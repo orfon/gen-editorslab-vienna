@@ -27,6 +27,11 @@
          verbose="true"
          dest="lib"
       />
+      <get
+        src="http://central.maven.org/maven2/com/google/guava/guava/18.0/guava-18.0.jar"
+        verbose="true"
+        dest="lib"
+        />
    </target>
 
    <target name="packages">

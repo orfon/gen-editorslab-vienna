@@ -2,8 +2,16 @@
 
 {% block main %}
 
-<h2>Hello World!</h2>
+<div class="orfon-edlab-topiclist">
 
+   {% for topic in topics %}
+   <a href="/tp/{{ topic.slug }}">
+      <div class="orfon-edlab-topic-header orfon-edlab-topic-header--small {% if topic.image != "" %}orfon-edlab--hasImage{% endif %}" {% if topic.image != "" %}style="background-image: url('{{topic.image}}');"{% endif %}>
+      <h2>{{ topic.title }}</h2>
+      </div>
+   </a>
+   {% endfor %}
 
+</div>
 
 {% endblock %}

@@ -7,43 +7,45 @@
 <form action="/tp/{{ topic.slug }}/createQuestion" method="post">
    <div class="row">
       <div class="medium-12 columns">
-      <textarea name="text" class="orfon-edlab-questionfield" required></textarea>
+      <textarea name="text" class="orfon-edlab-questionfield" id="orfon-edlab-questionfield" required></textarea>
+      </div>
+   </div>
+
+   <div class="orfon-edlab-question-details" id="orfon-edlab-question-details">
+      <div class="row">
+         <div class="medium-12 columns">
+            <label>Ihr Name*
+               <input type="text" name="enqName" placeholder="Vor- und Nachname" required>
+            </label>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="medium-12 columns">
+            <label>E-Mail*
+               <input type="email" name="enqEmail" placeholder="ihre-email@adresse.at" required aria-describedby="emailHelp">
+            </label>
+            <p class="help-text" id="emailHelp">Ihre E-Mail-Adresse wird nicht veröffentlicht.</p>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="medium-6 columns">
+            <label>Telefonnummer
+               <input type="tel" name="enqPhone" placeholder="+43 616 12345678">
+            </label>
+         </div>
+         <div class="medium-6 columns">
+            <label>Twitter
+               <input type="text" name="enqTwitter" placeholder="@twitter">
+            </label>
+         </div>
       </div>
    </div>
 
    <div class="row">
       <div class="medium-6 columns">
-         <label>Ihr Name*
-            <input type="text" name="enqName" placeholder="Vor- und Nachname" required>
-         </label>
-      </div>
-   </div>
-
-   <div class="row">
-      <div class="medium-6 columns">
-         <label>E-Mail*
-            <input type="email" name="enqEmail" placeholder="ihre-email@adresse.at" required aria-describedby="emailHelp">
-         </label>
-         <p class="help-text" id="emailHelp">Ihre E-Mail-Adresse wird nicht veröffentlicht.</p>
-      </div>
-   </div>
-
-   <div class="row">
-      <div class="medium-6 columns">
-         <label>Telefonnummer
-            <input type="tel" name="enqPhone" placeholder="+43 616 12345678">
-         </label>
-      </div>
-      <div class="medium-6 columns">
-         <label>Twitter
-            <input type="text" name="enqTwitter" placeholder="@twitter">
-         </label>
-      </div>
-   </div>
-
-   <div class="row">
-      <div class="medium-6 columns">
-         <button class="button" type="submit">Frage einreichen</button>
+         <button class="button disabled" type="submit" id="orfon-edlab-question-submit">Frage einreichen</button>
       </div>
    </div>
 

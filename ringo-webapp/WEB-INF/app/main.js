@@ -12,29 +12,31 @@ var reinhardt = new Reinhardt({
 
 // the SQL store
 var store = require("./model/store");
+var {AdminUser, Topic, Question, Answer} = require("./model/all");
 
 // detect if development or production environment
 var {SystemProperty} = Packages.com.google.appengine.api.utils;
 const PROD_ENV = SystemProperty.environment.value() == SystemProperty.Environment.Value.Production;
 
-// create tables if necessary, and app is not in production mode
-if (!PROD_ENV) {
-   if (typeof(store.syncTables) === "function") {
-      store.syncTables();
-   }
+if (typeof(store.syncTables) === "function") {
+   store.syncTables();
 }
 
 // mount routes
 app.mount("/admin", require("./routes/admin"));
 app.mount("/tp", require("./routes/topic"));
+app.mount("/api", require("./routes/api"));
 
 // default routes
 app.get("/", function (req) {
-   return response.html(reinhardt.getTemplate("frontpage.html").render({}));
+   return response.html(reinhardt.getTemplate("frontpage.html").render({
+      topics: Topic.all()
+   }));
 });
 
-app.get("/config", function(req) {
-   return response.text(config.get("driverClass"));
+app.get("/invalidate", function(req) {
+   req.session.invalidate();
+   return response.text("Done");
 });
 
 app.get("/version", function (req) {

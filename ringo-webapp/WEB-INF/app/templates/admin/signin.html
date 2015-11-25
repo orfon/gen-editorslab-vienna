@@ -2,24 +2,34 @@
 
 {% block main %}
 
-<h2>Sign in</h2>
+<div class="row">
+   <div class="large-12 columns">
+      <h2>Sign In</h2>
+   </div>
+</div>
 
 {% if message %}
-<div class="alert callout">
-   <p>{{ message }}</p>
+<div class="row">
+   <div class="large-12 columns">
+      <div class="alert callout">
+         <p>{{ message }}</p>
+      </div>
+   </div>
 </div>
 {% endif %}
 
-<form action="signin" method="POST" class="small-5">
-   <label>Username
-      <input type="text" name="username" placeholder="">
-   </label>
-   <label>Password
-      <input type="password" name="password">
-   </label>
+<div class="row">
+   <form action="signin" method="POST" class="small-5 columns">
+      <label>Username
+         <input type="text" name="username" placeholder="">
+      </label>
+      <label>Password
+         <input type="password" name="password">
+      </label>
 
-   <button type="submit" class="button">Sign in</button>
+      <button type="submit" class="button">Sign in</button>
 
-</form>
+   </form>
+</div>
 
 {% endblock %}

@@ -2,9 +2,14 @@
 
 <h3>Das sehen wir uns gerade an &hellip;</h3>
 
-<ul>
+<ul class="orfon-edlab-question-list">
    {% for question in investigationQuestions %}
-   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
+   <li class="investigate">
+      <a href="/tp/{{ topic.slug }}/fragen/{{ question.id }}">
+         <h4>{{ question.enquirer.name }}</h4>
+         <p>{{ question.text | truncatewords:15 }}</p>
+      </a>
+   </li>
    {% endfor %}
 </ul>
 {% endif %}

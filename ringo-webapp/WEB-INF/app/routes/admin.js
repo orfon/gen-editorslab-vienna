@@ -30,7 +30,8 @@ var getCurrentUser = function(request) {
 app.get("/", function(request) {
    if (isAdmin(request)) {
       return response.html(reinhardt.getTemplate("admin/overview.html").render({
-         user: getCurrentUser(request)
+         user: getCurrentUser(request),
+         topics: Topic.all()
       }));
    }
 
@@ -98,10 +99,10 @@ app.get("/topic/:slug", function(request, slug) {
 
    return response.html(reinhardt.getTemplate("admin/topic.html").render({
       "topic": topic,
-      "unreviewedQuestions": topic.unreviewedQuestions.all(),
-      "reviewedQuestions": topic.reviewedQuestions.all(),
-      "investigationQuestions": topic.investigationQuestions.all(),
-      "answeredQuestions": topic.answeredQuestions.all()
+      "unreviewedQuestions": topic.unreviewedQuestions.all,
+      "reviewedQuestions": topic.reviewedQuestions.all,
+      "investigationQuestions": topic.investigationQuestions.all,
+      "answeredQuestions": topic.answeredQuestions.all
    }));
 });
 
@@ -236,7 +237,7 @@ app.get("/topic/:slug/:question/editanswers", function(request, slug, qid) {
    return response.html(reinhardt.getTemplate("admin/editanswers.html").render({
       "topic": topic,
       "question": question,
-      "answers": question.answers.all()
+      "answers": question.answers.all
    }));
 });
 

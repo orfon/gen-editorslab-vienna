@@ -2,35 +2,70 @@
 
 {% block main %}
 
-<h2>Hello {{ user.name }}</h2>
+<div class="row">
+   <div class="large-12 columns" style="margin-top: 16px;">
+      <h2>Hello {{ user.name }}</h2>
+   </div>
+</div>
 
 {% if message %}
-<div class="alert callout">
-   <p>{{ message }}</p>
+<div class="row">
+   <div class="large-12 columns">
+      <div class="alert callout">
+         <p>{{ message }}</p>
+      </div>
+   </div>
 </div>
 {% endif %}
 
-<h3>Add Topic</h3>
+<div class="row">
+   <div class="large-12 columns">
+      <h4>Current Topics</h4>
+      <ul style="margin-left: 15px;">
+         {% for topic in topics %}
+         <li>
+            <a href="/admin/topic/{{ topic.slug }}">
+               {{ topic.title }}
+            </a>
+         </li>
+         {% empty %}
+         <li>No topics created.</li>
+         {% endfor %}
+      </ul>
+   </div>
+</div>
 
-<form method="POST" action="createTopic" class="small-8">
-   <label>
-      Title
-      <input type="text" name="title" placeholder="My Special Topic" required>
-   </label>
+<div class="row">
+   <div class="large-12 columns">
+      <h4>Add Topic</h4>
+   </div>
+</div>
 
-   <label>
-      Slug
-      <input type="text" name="slug" placeholder="my-special-topic" pattern="^[a-z0-9-]+$" required>
-   </label>
+<div class="row">
+   <form method="POST" action="createTopic" class="large-8 columns">
+      <label>
+         Title
+         <input type="text" name="title" placeholder="My Special Topic" required>
+      </label>
 
-   <label>
-      Image URL
-      <input type="url" name="image" placeholder="http://lorempixel.com/800/400/people/">
-   </label>
+      <label>
+         Slug
+         <input type="text" name="slug" placeholder="my-special-topic" pattern="^[a-z0-9-]+$" required>
+      </label>
 
-   <button type="submit" class="button">Create Topic</button>
-</form>
+      <label>
+         Image URL
+         <input type="url" name="image" placeholder="http://lorempixel.com/800/400/people/">
+      </label>
 
-<a href="/admin/signout" class="button">Sign Out</a>
+      <button type="submit" class="button">Create Topic</button>
+   </form>
+</div>
+
+<div class="row">
+   <div class="large-12 columns" style="margin-top: 16px;">
+      <a href="/admin/signout" class="button alert">Sign Out</a>
+   </div>
+</div>
 
 {% endblock %}

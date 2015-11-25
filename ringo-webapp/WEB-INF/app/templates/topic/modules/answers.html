@@ -1,10 +1,16 @@
 {% if answeredQuestions.length > 0 %}
+<div class="orfon-edlab-front-answers">
+   <h3>Wir haben recherchiert &hellip;</h3>
 
-<h3>Wir haben recherchiert &hellip;</h3>
-
-<ul>
-   {% for question in answeredQuestions %}
-   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
-   {% endfor %}
-</ul>
+   <ul class="orfon-edlab-question-list">
+      {% for question in answeredQuestions %}
+      <li class="answered">
+         <a href="/tp/{{ topic.slug }}/fragen/{{ question.id }}">
+            <h4>{{ question.enquirer.name }}</h4>
+            <p>{{ question.text | truncatewords:15 }}</p>
+         </a>
+      </li>
+      {% endfor %}
+   </ul>
+</div>
 {% endif %}

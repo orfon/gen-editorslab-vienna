@@ -2,15 +2,23 @@
 
 {% block main %}
 
-<h2>{{ topic.title }}</h2>
+<div class="orfon-edlab-topic-header orfon-edlab-topic-header--small {% if topic.image != "" %}orfon-edlab--hasImage{% endif %}" {% if topic.image != "" %}style="background-image: url('{{topic.image}}');"{% endif %}>
+<a href="/tp/{{ topic.slug }}"><h2>{{ topic.title }}</h2></a>
+</div>
 
-<h3>Danke für deine Frage!</h3>
+<div class="row">
+   <div class="small-12 columns">
 
-<blockquote>
-   {{ question.text }}
-   <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
-</blockquote>
+      <h3>Danke für Ihre Frage!</h3>
 
-<a href="/tp/{{ topic.slug }}" class="button">Zurück zur Übersicht</a>
+      <p>Wir schalten Ihre Frage nach einer redaktionellen Prüfung so schnell wie möglich frei.</p>
 
+      <blockquote>
+         {{ question.text }}
+         <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
+      </blockquote>
+
+      <a href="/tp/{{ topic.slug }}" class="button">Zurück zur Übersicht</a>
+   </div>
+</div>
 {% endblock %}

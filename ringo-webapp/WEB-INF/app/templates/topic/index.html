@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 
 {% block main %}
-
-<h2>{{ topic.title }}</h2>
-
-<div class="orfon-edlab-frontmodule">
-   {% include "topic/modules/form.html" %}
+<div class="orfon-edlab-topic-header {% if topic.image != "" %}orfon-edlab--hasImage{% endif %}" {% if topic.image != "" %}style="background-image: url('{{topic.image}}');"{% endif %}>
+   <h2>{{ topic.title }}</h2>
 </div>
 
-<div class="orfon-edlab-frontmodule">
-   {% include "topic/modules/answers.html" %}
-</div>
+<div class="orfon-edlab-front">
 
-<div class="orfon-edlab-frontmodule">
-   {% include "topic/modules/underinvestigation.html" %}
-</div>
+   <div class="orfon-edlab-frontmodule">
+      {% include "topic/modules/upforvoting.html" %}
 
-<div class="orfon-edlab-frontmodule">
-   {% include "topic/modules/upforvoting.html" %}
-</div>
+      {% include "topic/modules/answers.html" %}
 
+      {% include "topic/modules/underinvestigation.html" %}
+   </div>
+
+   <div class="orfon-edlab-frontmodule">
+      {% include "topic/modules/form.html" %}
+   </div>
+</div>
 {% endblock %}
+
+{% block customScripts %}
+<script src="/assets/scripts/edlab-voting.js"></script>
+<script src="/assets/scripts/edlab-questioneditor.js"></script>
+{% endblock%}

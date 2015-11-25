@@ -2,9 +2,27 @@
 
 <h3>Was Sie wissen wollen &hellip;</h3>
 
-<ul>
+<ul class="orfon-edlab-question-list">
    {% for question in reviewedQuestions %}
-   <li>{{ question.text }} - {{ question.enquirer.name }}</li>
+   <li class="voting">
+      <a href="/tp/{{ topic.slug }}/fragen/{{ question.id }}">
+         <h4>{{ question.enquirer.name }}</h4>
+         <p>{{ question.text | truncatewords:15 }}</p>
+      </a>
+      {% if question.voted != true %}
+      <button class="orfon-edlab-upvote-button" data-upvote="/api/upvote?q={{ question.id }}">
+         <span class="orfon-edlab-upvote-count">{{ question.upvotes }}</span>
+         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512"><path fill="#1D1D1B" stroke="#1D1D1B" stroke-width="37.615" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M259.216 29.942l71.054 143.977 158.89 23.088-114.975 112.073 27.145 158.23-142.114-74.698-142.112 74.698 27.146-158.23-114.976-112.073 158.891-23.088z"/></svg>
+         <span>Gute Frage!</span>
+      </button>
+      {% else %}
+      <button class="orfon-edlab-upvote-button" disabled>
+         <span class="orfon-edlab-upvote-count">{{ question.upvotes }}</span>
+         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512"><path fill="#1D1D1B" stroke="#1D1D1B" stroke-width="37.615" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M259.216 29.942l71.054 143.977 158.89 23.088-114.975 112.073 27.145 158.23-142.114-74.698-142.112 74.698 27.146-158.23-114.976-112.073 158.891-23.088z"/></svg>
+      </button>
+      {% endif %}
+   </li>
    {% endfor %}
 </ul>
+
 {% endif %}

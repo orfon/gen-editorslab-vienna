@@ -1,77 +1,131 @@
 {% extends "base.html" %}
 
 {% block main %}
+<div class="orfon-edlab-admin">
+   <div class="orfon-edlab-topic-header orfon-edlab-topic-header--small {% if topic.image != "" %}orfon-edlab--hasImage{% endif %}" {% if topic.image != "" %}style="background-image: url('{{topic.image}}');"{% endif %}>
+      <h2>{{ topic.title }}</h2>
+   </div>
 
-<h2>{{ topic.title }}</h2>
+   <div class="row">
+      <div class="large-12 columns">
+         <h4>Incoming Questions</h4>
+      </div>
+   </div>
 
-<dl>
-   <dt>Slug:</dt>
-   <dd>{{ topic.slug }}</dd>
-   <dt>Image:</dt>
-   <dd>
-      {% if topic.image %}
-      <img src="{{ topic.image }}" alt="" style="max-width: 320px; margin-bottom: 8px;">
-      {% else %}
-      None
-      {% endif %}
-   </dd>
-   <dt>Creator:</dt>
-   <dd>{{ topic.creator.name }} <span style="color: #777;">({{ topic.created | date:"dd.MM.yyyy" }})</span></dd>
-</dl>
+   <div class="row">
+      <div class="large-12 columns">
+         <ul class="orfon-edlab-question-list">
+            {% for question in unreviewedQuestions %}
+               <li class="incoming">
+                  <div class="row">
+                     <div class="small-12 large-2 columns">
+                        <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/review" class="button tiny hollow">Approve</a>
+                        <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/drop" class="button tiny hollow alert">Drop</a>
+                     </div>
+                     <div class="small-12 large-10 columns">
+                        <h4>{{ question.enquirer.name }}<br>{{ question.enquirer.email }}</h4>
+                        <p>{{ question.text }}</p>
+                     </div>
+                  </div>
+               </li>
+            {% empty %}
+               <li>No questions so far.</li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
 
-<h4>New Questions</h4>
+   <div class="row">
+      <div class="large-12 columns">
+         <h4>Waiting for Investigation</h4>
+      </div>
+   </div>
 
-<ul>
-   {% for question in unreviewedQuestions %}
-      <li>
-         {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
-         <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/review" class="button tiny hollow">Mark as Reviewed</a>
-         <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/drop" class="button tiny hollow alert">Drop</a>
-      </li>
-   {% empty %}
-      <li>No questions so far.</li>
-   {% endfor %}
-</ul>
+   <div class="row">
+      <div class="large-12 columns">
+         <ul class="orfon-edlab-question-list">
+            {% for question in reviewedQuestions %}
+            <li class="voting">
+               <div class="row">
+                  <div class="small-12 large-2 columns">
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/investigate" class="button tiny hollow">Mark as Under Investigation</a>
+                  </div>
+                  <div class="small-12 large-10 columns">
+                     <h4>{{ question.enquirer.name }}<br>{{ question.enquirer.email }}</h4>
+                     <p>{{ question.text }}</p>
+                  </div>
+               </div>
+            </li>
+            {% empty %}
+            <li>No questions so far.</li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
 
-<h4>Waiting for Investigation</h4>
+   <div class="row">
+      <div class="large-12 columns">
+         <h4>Under Investigation</h4>
+      </div>
+   </div>
 
-<ul>
-   {% for question in reviewedQuestions %}
-   <li>
-      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
-      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/investigate" class="button tiny hollow">Mark as Under Investigation</a>
-   </li>
-   {% empty %}
-   <li>No questions so far.</li>
-   {% endfor %}
-</ul>
+   <div class="row">
+      <div class="large-12 columns">
+         <ul class="orfon-edlab-question-list">
+            {% for question in investigationQuestions %}
+            <li class="investigate">
+               <div class="row">
+                  <div class="small-12 large-2 columns">
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/answered" class="button tiny hollow">Set Answered</a>
+                  </div>
+                  <div class="small-12 large-10 columns">
+                     <h4>{{ question.enquirer.name }}<br>{{ question.enquirer.email }}</h4>
+                     <p>{{ question.text }}</p>
+                  </div>
+               </div>
+            </li>
+            {% empty %}
+            <li>No questions so far.</li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
 
-<h4>Under Investigation</h4>
+   <div class="row">
+      <div class="large-12 columns">
+         <h4>Answered</h4>
+      </div>
+   </div>
 
-<ul>
-   {% for question in investigationQuestions %}
-   <li>
-      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
-      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
-      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/answered" class="button tiny hollow">Set Answered</a>
-   </li>
-   {% empty %}
-   <li>No questions so far.</li>
-   {% endfor %}
-</ul>
+   <div class="row">
+      <div class="large-12 columns">
+         <ul class="orfon-edlab-question-list">
+            {% for question in answeredQuestions %}
+            <li class="answered">
+               <div class="row">
+                  <div class="small-12 large-2 columns">
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
+                  </div>
+                  <div class="small-12 large-10 columns">
+                     <h4>{{ question.enquirer.name }}<br>{{ question.enquirer.email }}</h4>
+                     <p>{{ question.text }}</p>
+                  </div>
+               </div>
+            </li>
+            {% empty %}
+            <li>No questions so far.</li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
 
-<h4>Answered</h4>
+   <div class="row">
+      <div class="large-12 columns">
+         <a href="/admin/" class="button">Back to Overview</a>
+      </div>
+   </div>
 
-<ul>
-   {% for question in answeredQuestions %}
-   <li>
-      {{ question.id }} - {{ question.text }} - {{ question.enquirer.name }} - {{ question.enquirer.email }}
-      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/editanswers" class="button tiny hollow">Edit Answers</a>
-      <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
-   </li>
-   {% empty %}
-   <li>No questions so far.</li>
-   {% endfor %}
-</ul>
-
+</div>
 {% endblock %}

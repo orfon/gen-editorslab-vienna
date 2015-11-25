@@ -36,9 +36,16 @@ app.get("/:slug", function(request, slug) {
 
    return response.html(reinhardt.getTemplate("topic/index.html").render({
       "topic": topic,
-      "reviewedQuestions": topic.reviewedQuestions.all(),
-      "investigationQuestions": topic.investigationQuestions.all(),
-      "answeredQuestions": topic.answeredQuestions.all()
+      "reviewedQuestions": topic.reviewedQuestions.map(function(question) {
+         if (request.session.data.countedVotes != null) {
+            if (request.session.data.countedVotes.contains(new java.lang.Integer(question.id))) {
+               question.voted = true;
+            }
+         }
+         return question;
+      }),
+      "investigationQuestions": topic.investigationQuestions.all,
+      "answeredQuestions": topic.answeredQuestions.all
    }));
 });
 
@@ -104,4 +111,30 @@ app.get("/:slug/danke", function(request, slug) {
    }
 
    return response.redirect("/tp/" + slug);
+});
+
+app.get("/:slug/fragen/:qid", function(request, slug, qid) {
+   let topic = Topic.getBySlug(slug);
+   if (topic == null) {
+      return response.notFound().html(
+         reinhardt.getTemplate("notfound.html").render({})
+      );
+   }
+
+   qid = parseInt(qid, 10);
+   if (!isNaN(qid) && qid > 0) {
+      let question = Question.getById(qid);
+
+      if (question != null && (question.state == Question.UNDER_INVESTIGATION || question.state == Question.REVIEWED || question.state == Question.ANSWERED)) {
+         return response.html(reinhardt.getTemplate("topic/answers.html").render({
+            "topic": topic,
+            "question": question,
+            "answers": question.answers.all
+         }));
+      }
+   }
+
+   return response.notFound().html(
+      reinhardt.getTemplate("notfound.html").render({})
+   );
 });
