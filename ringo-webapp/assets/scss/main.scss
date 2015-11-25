@@ -117,6 +117,10 @@ p {
       &.voting { border-left: 2px solid #f4c554; }
       &.investigate { border-left: 2px solid #913D88; }
 
+      &.voting {
+         margin-bottom: 16px;
+      }
+
       h4 {
          font-size: 15px;
          font-weight: 500;

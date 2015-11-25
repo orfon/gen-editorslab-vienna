@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 
 {% block main %}
-
-<div class="row">
-   <div class="large-12 columns">
-      <h2>Sign In</h2>
-   </div>
-</div>
-
-{% if message %}
-<div class="row">
-   <div class="large-12 columns">
-      <div class="alert callout">
-         <p>{{ message }}</p>
+<div class="orfon-edlab-admin">
+   <div class="row">
+      <div class="large-12 columns" style="padding-top: 16px;">
+         <h2>Sign In</h2>
       </div>
    </div>
+
+   {% if message %}
+   <div class="row">
+      <div class="large-12 columns">
+         <div class="alert callout">
+            <p>{{ message }}</p>
+         </div>
+      </div>
+   </div>
+   {% endif %}
+
+   <div class="row">
+      <form action="signin" method="POST" class="small-5 columns">
+         <label>Username
+            <input type="text" name="username" placeholder="">
+         </label>
+         <label>Password
+            <input type="password" name="password">
+         </label>
+
+         <button type="submit" class="button">Sign in</button>
+
+      </form>
+   </div>
 </div>
-{% endif %}
-
-<div class="row">
-   <form action="signin" method="POST" class="small-5 columns">
-      <label>Username
-         <input type="text" name="username" placeholder="">
-      </label>
-      <label>Password
-         <input type="password" name="password">
-      </label>
-
-      <button type="submit" class="button">Sign in</button>
-
-   </form>
-</div>
-
 {% endblock %}

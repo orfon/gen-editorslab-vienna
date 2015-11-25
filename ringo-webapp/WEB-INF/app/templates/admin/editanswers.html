@@ -1,63 +1,81 @@
 {% extends "base.html" %}
 
 {% block main %}
-
-<div class="row">
-   <div class="medium-12 columns">
-
-      <h2>Answer Question #{{ question.id }}</h2>
-      <blockquote>
-         {{ question.text }}
-         <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
-      </blockquote>
-   </div>
-</div>
-
-<form action="/admin/topic/{{ topic.slug }}/{{question.id}}/editanswers" method="post">
-   <div class="row">
-      <div class="medium-6 columns">
-         <h3>Add Answer</h3>
-      </div>
-   </div>
-
+<div class="orfon-edlab-admin">
    <div class="row">
       <div class="medium-12 columns">
-         <label>Text:
-            <textarea name="text" rows="5"></textarea>
-         </label>
+
+         <h2 style="padding-top: 16px;">Answer Question #{{ question.id }}</h2>
+         <blockquote>
+            {{ question.text }}
+            <cite>{{ question.enquirer.name }}, {{ question.enquirer.email }}</cite>
+         </blockquote>
+      </div>
+   </div>
+
+   <form action="/admin/topic/{{ topic.slug }}/{{question.id}}/editanswers" method="post">
+      <div class="row">
+         <div class="medium-6 columns">
+            <h3>New Answer</h3>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="medium-12 columns">
+            <label>Text:
+               <textarea name="text" rows="5"></textarea>
+            </label>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="medium-12 columns">
+            <label>Link
+               <input type="url" name="link" placeholder="http://" aria-describedby="answerHelp">
+            </label>
+            <p class="help-text" id="answerHelp">An answer can contain a text, a link, or both.</p>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="medium-6 columns">
+            <button class="button" type="submit">Add Answer</button>
+         </div>
+      </div>
+   </form>
+
+   <div class="row">
+      <div class="large-12 columns">
+         <h4>Existing Answers</h4>
       </div>
    </div>
 
    <div class="row">
-      <div class="medium-12 columns">
-         <label>Link
-            <input type="url" name="link" placeholder="http://" aria-describedby="answerHelp">
-         </label>
-         <p class="help-text" id="answerHelp">An answer can contain a text, a link, or both.</p>
+      <div class="large-12 columns">
+         <ul class="orfon-edlab-question-list">
+            {% for answer in answers %}
+            <li class="answered" style="margin-bottom: 16px;">
+               <div class="row">
+                  <div class="small-12 large-2 columns">
+                     <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/{{ answer.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
+                  </div>
+                  <div class="small-12 large-10 columns">
+                     <h4 style="font-weight: 700;">{{ answer.creator.name }}</h4>
+                     <p>{{ answer.text }}</p>
+                  </div>
+               </div>
+            </li>
+            {% empty %}
+            <li>No answers so far.</li>
+            {% endfor %}
+         </ul>
       </div>
    </div>
 
    <div class="row">
-      <div class="medium-6 columns">
-         <button class="button" type="submit">Add Answer</button>
+      <div class="large-12 columns" style="padding-top: 22px;">
+         <a href="/admin/" class="button">Back to Overview</a>
       </div>
-   </div>
-</form>
-
-<div class="row">
-   <div class="medium-12 columns">
-      <ul>
-         {% for answer in answers %}
-         <li>
-            {{ answer.id }} - {{ answer.text }} - {{ answer.creator.name }}
-            <a href="/admin/topic/{{ topic.slug}}/{{ question.id }}/{{ answer.id }}/offline" class="button tiny hollow secondary">Set Offline</a>
-         </li>
-         {% empty %}
-         <li>No answers so far.</li>
-         {% endfor %}
-      </ul>
    </div>
 </div>
-
-
 {% endblock %}
